@@ -2,5 +2,6 @@
 
 void setInterval(unsigned long delta);
 bool startLapse();
-bool stopLapse();
+void stopLapse();
+bool inLapse();
 bool processLapse(unsigned long dt);

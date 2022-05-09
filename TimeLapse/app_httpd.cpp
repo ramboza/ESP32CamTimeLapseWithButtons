@@ -22,9 +22,10 @@
 #include "EEPROM.h"
 #include "lapse.h"
 
-const char *indexHtml =
-#include "index.h"
-	;
+const char *indexHtml = 
+#include "index.h" 
+;
+
 
 extern unsigned long frameInterval;
 
@@ -109,11 +110,13 @@ static esp_err_t capture_handler(httpd_req_t *req)
 static esp_err_t startLapseHandler(httpd_req_t *req)
 {
 	startLapse();
+	return 0;
 }
 
 static esp_err_t stopLapseHandler(httpd_req_t *req)
 {
 	stopLapse();
+	return 0;
 }
 
 static esp_err_t streamHandler(httpd_req_t *req)

@@ -7,3 +7,6 @@
  - action for make Photo bindind as RX button
  - photos stored in /photos folder
   
+  
+
+Can be used with PlatformIO and Arduino IDE.

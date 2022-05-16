@@ -55,7 +55,6 @@ void button_RX_Photo(void) {
 		digitalWrite(33, LOW);
 		makePhoto();
 		digitalWrite(33, HIGH);
-
 		btndbc = 0xe000;
 	}
 }
@@ -78,8 +77,9 @@ void setup() {
 	Serial.println("\nInit SD filesystem ...");
 	initFileSystem();
 
-	Serial.println("\nInit camera ...");
-	initCamera();
+	// init on demand
+	//Serial.println("\nInit camera ...");
+	//initCamera();
 
 	initWifi();
 

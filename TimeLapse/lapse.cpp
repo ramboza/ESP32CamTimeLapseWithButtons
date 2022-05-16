@@ -47,10 +47,13 @@ bool processLapse(unsigned long dt) {
         if (lastFrameDelta >= frameInterval) {
 		digitalWrite(33, HIGH);
 
+		initCamera();
+
 		lastFrameDelta -= frameInterval;
                 camera_fb_t *fb = esp_camera_fb_get();
                 if (!fb) {
                         Serial.println("Camera capture failed");
+			esp_camera_deinit();
                         return false;
                 }
 
@@ -59,11 +62,12 @@ bool processLapse(unsigned long dt) {
                 Serial.println(path);
                 if (!writeFile(path, (const unsigned char *)fb->buf, fb->len)) {
                         lapseRunning = false;
+			esp_camera_deinit();
                         return false;
                 }
                 fileIndex++;
                 esp_camera_fb_return(fb);
-
+		esp_camera_deinit();
 		digitalWrite(33, LOW);
         }
         return true;

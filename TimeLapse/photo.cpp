@@ -29,10 +29,13 @@ bool makePhoto() {
 	// a bit ugly, but fine for testing ;)
 	if (photoIndex = -1) photoIndex = getLastIndex();
 
+	initCamera();
+
 	esp_err_t res = ESP_OK;
 	camera_fb_t *fb = esp_camera_fb_get();
 	if (!fb) {
 		Serial.println("Camera capture failed");
+		esp_camera_deinit();
 		return false;
 	}
 
@@ -41,8 +44,10 @@ bool makePhoto() {
 	Serial.println(path);
 
 	if (!writeFile(path, (const unsigned char *)fb->buf, fb->len)) {
+		esp_camera_deinit();
 		return false;
 	}
 	esp_camera_fb_return(fb);
+	esp_camera_deinit();
 	return true;
 }
